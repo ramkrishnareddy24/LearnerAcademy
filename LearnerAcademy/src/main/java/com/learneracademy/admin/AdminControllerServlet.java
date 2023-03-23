@@ -1,6 +1,8 @@
 package com.learneracademy.admin;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -72,6 +74,7 @@ public class AdminControllerServlet extends HttpServlet {
 				case "LOGIN":
 					login(request, response);
 					break;
+				
 				default:
 					classesList(request, response);
 
@@ -82,6 +85,8 @@ public class AdminControllerServlet extends HttpServlet {
 			throw new ServletException(e);
 		}
 	}
+
+	
 
 	private void studentsList(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -136,6 +141,8 @@ public class AdminControllerServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/class-students.jsp");
 		dispatcher.forward(request, response);
 	}
+	
+	
 
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");

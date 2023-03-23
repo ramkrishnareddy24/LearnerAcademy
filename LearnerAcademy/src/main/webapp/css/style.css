@@ -83,9 +83,21 @@ tr:nth-child(odd) {background: #BBBBBB}
 #page{
  
   height: 100%;
+  padding : 10px;
   
 	
 }
+
+#maindiv{
+	
+	height: 100%;
+	padding: 50px;
+	margin-left: 50px;
+	background-color: grey;
+	border-radius: 25px;
+}
+
+
 
 
 #logo{

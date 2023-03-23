@@ -1,7 +1,9 @@
 package com.learneracademy.admin;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -251,6 +253,32 @@ public class DatabaseUtil {
 		
 	}
 	
+	public void assignNewClass(int section,int teacher,int subject,String time) {
+		Connection con = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			con = this.dataSource.getConnection();
+			String sql = "insert into classes (section,teacher,subject,time) values(?,?,?,?)";
+			
+			stmt = con.prepareStatement(sql);
+			
+			stmt.setInt(1, section);
+			stmt.setInt(2, teacher);
+			stmt.setInt(3, subject);
+			stmt.setString(4, time);
+			
+			stmt.execute();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(con,stmt,null);
+		}
+		
+	}
+	
 	private void close(Connection con, Statement stmt, ResultSet res) {
 		try {
 			if(res != null) {
@@ -267,6 +295,10 @@ public class DatabaseUtil {
 			e.printStackTrace();
 		}
 	}
+
+	
+
+	
 	
 	
 }

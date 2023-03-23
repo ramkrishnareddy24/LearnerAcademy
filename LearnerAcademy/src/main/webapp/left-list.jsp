@@ -23,6 +23,10 @@
 		<c:param name="command" value="STUDENTS"></c:param>
 	</c:url>
 	
+	<c:url var="assignLink" value="AdminControllerServlet">
+		<c:param name="command" value="ASSIGN"></c:param>
+	</c:url>
+	
 	
 	
 	<a class="bar-item" href="${classesLink}">Classes</a>
@@ -32,6 +36,8 @@
 	<a class="bar-item" href="${teachersLink}">Teachers</a>
 	
 	<a class="bar-item" href="${studentsLink}">Students</a>
+	
+	<a class="bar-item" href="assign-class-form.jsp">Assign Class</a>
 	
 	<a class="bar-item" href="login.jsp">Logout</a>
 	
