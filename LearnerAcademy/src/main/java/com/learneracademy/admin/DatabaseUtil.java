@@ -296,9 +296,4 @@ public class DatabaseUtil {
 		}
 	}
 
-	
-
-	
-	
-	
 }

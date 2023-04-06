@@ -74,7 +74,7 @@ public class AdminControllerServlet extends HttpServlet {
 				case "LOGIN":
 					login(request, response);
 					break;
-				
+
 				default:
 					classesList(request, response);
 
@@ -85,8 +85,6 @@ public class AdminControllerServlet extends HttpServlet {
 			throw new ServletException(e);
 		}
 	}
-
-	
 
 	private void studentsList(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -118,7 +116,8 @@ public class AdminControllerServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void classesList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void classesList(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		List<Class> classes = dbUtil.getClasses();
 
 		request.setAttribute("CLASSES_LIST", classes);
@@ -127,36 +126,33 @@ public class AdminControllerServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void classStudentsList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void classStudentsList(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int classId = Integer.parseInt(request.getParameter("classId"));
 		String section = request.getParameter("section");
 		String subject = request.getParameter("subject");
-		
+
 		List<Student> students = dbUtil.loadClassStudents(classId);
-		
+
 		request.setAttribute("STUDENTS_LIST", students);
 		request.setAttribute("SECTION", section);
 		request.setAttribute("SUBJECT", subject);
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/class-students.jsp");
 		dispatcher.forward(request, response);
 	}
-	
-	
 
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
-		if(username.toLowerCase().equals("admin") && password.toLowerCase().equals("admin")) {
-			Cookie cookie = new Cookie(username,password);
+
+		if (username.toLowerCase().equals("admin") && password.toLowerCase().equals("admin")) {
+			Cookie cookie = new Cookie(username, password);
 			cookie.setMaxAge(86400);
-			
+
 			response.addCookie(cookie);
-			classesList(request,response);
-		}
-		else
-		{
+			classesList(request, response);
+		} else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -164,10 +160,10 @@ public class AdminControllerServlet extends HttpServlet {
 
 	private boolean getCookies(HttpServletRequest request, HttpServletResponse response) {
 		boolean check = false;
-		Cookie[] cookies  =request.getCookies();
-		
-		for(Cookie cookie : cookies) {
-			if(cookie.getName().equals("admin") && cookie.getValue().equals("admin")) {
+		Cookie[] cookies = request.getCookies();
+
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("admin") && cookie.getValue().equals("admin")) {
 				check = true;
 				break;
 			}
